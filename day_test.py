@@ -45,11 +45,17 @@ def isevensum(x):
 def sum7(x):
     return sum([int(a) for a in str(x)])>=7
 
+def iscloser(x):
+    return x<75
+
 def product(list):
     p = 1
     for i in list:
         p *= i
     return p
+
+def add13(x):
+    return sum([int(a) for a in str(x)])==13
 
 def prod(x):
     return product([int(a) for a in str(x)])>=20
@@ -66,7 +72,7 @@ def toText (x):
     else:
         return "no"
 
-myrange=range(1,100+1)
+myrange=range(410,420+1)
 tally=0
 for num in myrange:
 
@@ -87,6 +93,8 @@ for num in myrange:
     evensum= isevensum(num)
     greatersum=sum7(num)
     proddig=prod(num)
+    closer=iscloser(num)
+    sum13=add13(num)
     if prime:
         lis=filteryes(isprime, lis)
     else:
@@ -125,6 +133,10 @@ for num in myrange:
         lis=filterno(prod, lis)
     if greater:
         lis=filteryes(isgreater, lis)
+        if closer:
+            lis=filteryes(iscloser, lis)
+        else:
+            lis=filterno(iscloser, lis)
     else:
         lis=filterno(isgreater, lis)
 
@@ -146,12 +158,16 @@ for num in myrange:
     else:
         lis=filterno(ispal, lis)
 
+    if sum13:
+        lis=filteryes(add13, lis)
+    else:
+        lis=filterno(add13, lis)
     if digit:
         lis=filteryes(dig, lis)
     else:
         lis=filterno(dig,lis)
 
-    if len(lis)==2:
+    if len(lis)==1:
         tally+=1
         print (str(lis))
 
